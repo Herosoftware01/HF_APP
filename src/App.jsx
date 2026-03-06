@@ -11,6 +11,7 @@ import MenuPage from "./components/user_control/MenuPage";
 import SubMenuPermissionPage from "./components/user_control/SubMenuPermissionPage";
 import QualityApp from "./components/quality_app/main/Quality_main"
 import Qc_entry from "./components/quality_app/quality/Qc"
+import Syncfushion from "./components/syncfushion/main/home"
 
 function App() {
 
@@ -77,6 +78,16 @@ function App() {
           }
         />
 
+        <Route
+          path="/sy-order/*"
+          element={
+            <ProtectedRoute>
+              <ProtectedLayout>
+                <Syncfushion />
+              </ProtectedLayout>
+            </ProtectedRoute>
+          }
+        />
         <Route
           path="/qc-admin/*"
           element={
