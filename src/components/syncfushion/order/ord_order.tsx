@@ -23,7 +23,7 @@ interface OrderData {
   shipment_complete: string; u7: string; u141: string; u45: string; u36: string; u31: string;
   u15: string; u14: string; u8: string; u25: string; insdate: string; insdateyear: string;
   actdaten: string; actyeardate: string; pono: string; slno: string; u46: string; u37: string;
-  mainimagepath: string; finaldelvdate: string; prnclr?: string | null; prnfile1?: string; prnfile2?: string;
+  mainimagepath: string; finaldelvdate: string; prnclr?: string | null; prnfile1?: string; prnfile2?: string;img_fpath?:string
 }
 
 const HeroFashionGrid13: React.FC = () => {
@@ -98,7 +98,8 @@ const HeroFashionGrid13: React.FC = () => {
             ...order,
             prnclr: matchingPrintData.prnclr || null,
             prnfile1: matchingPrintData.prnfile1 || '',
-            prnfile2: matchingPrintData.prnfile2 || ''
+            prnfile2: matchingPrintData.prnfile2 || '',
+            img_fpath: matchingPrintData.img_fpath || ''
           };
         });
 
@@ -340,12 +341,14 @@ const HeroFashionGrid13: React.FC = () => {
 
             <ColumnDirective field="prnfile1" headerText="PRN IMG 1" width="90" textAlign="Center" allowFiltering={false} template={imageFieldTemplate('prnfile1')} />
             <ColumnDirective field="prnfile2" headerText="PRN IMG 2" width="90" textAlign="Center" allowFiltering={false} template={imageFieldTemplate('prnfile2')} />
+            <ColumnDirective field="img_fpath" headerText="img_fpath" width="90" textAlign="Center" allowFiltering={false} template={imageFieldTemplate('img_fpath')} />
             <ColumnDirective field="prnclr" type="string" headerText="PRN COLOR" width="100" template={genericHighlighter('prnclr')} />
 
             <ColumnDirective field="u25" headerText="U25" width="90" template={genericHighlighter('u25')} />
             <ColumnDirective field="abc" headerText="ABC" width="85" template={genericHighlighter('abc')} />
             <ColumnDirective field="u46" headerText="U46" width="85" template={genericHighlighter('u46')} />
-            <ColumnDirective field="u37" headerText="AOP" width="90" template={genericHighlighter('u37')} />
+            <ColumnDirective field="production_type_inside_outside" headerText="type" width="85" template={genericHighlighter('production_type_inside_outside')} />
+            <ColumnDirective field="u37" headerText="AOP 37" width="90" template={genericHighlighter('u37')} />
             <ColumnDirective field="printing_R" headerText="PRINTING" width="110" template={genericHighlighter('printing_R')} />
             <ColumnDirective field="Emb" type="string" headerText="EMB" width="100" template={genericHighlighter('Emb')} />
             <ColumnDirective field="buyer1" type="string" headerText="BUYER" width="120" template={genericHighlighter('buyer1')} />
