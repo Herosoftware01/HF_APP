@@ -10,6 +10,7 @@ import '../../../../node_modules/@syncfusion/ej2-navigations/styles/material.css
 import '../../../../node_modules/@syncfusion/ej2-popups/styles/material.css';
 
 import '../../../../node_modules/@syncfusion/ej2-react-grids/styles/material.css';
+import CardGrid from '../order/Card.jsx';
 // @import '@syncfusion/ej2-grids/styles/material.css';
 
 // import '../css/style.css'
@@ -17,9 +18,10 @@ import '../../../../node_modules/@syncfusion/ej2-react-grids/styles/material.css
 function Home() {
   return (
     <Routes>
-        <Route path="" element={<HeroFashionGrid13 />} />
+        <Route path="/" element={<CardGrid />} />
+        <Route path="/order" element={<HeroFashionGrid13 />} />
         <Route path="god/" element={<h1>Good</h1> } />
-
+        
     </Routes>
   );
 }
