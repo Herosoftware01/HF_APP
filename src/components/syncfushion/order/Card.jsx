@@ -23,7 +23,7 @@ const CardGrid = () => {
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 p-6">
       <Card title="Order" />
       <Card title="Grid-order" />
-      <Card title="Syncfusion" />
+      <Card title="Syncfusion1" />
       <Card title="Bala" />
     </div>
   );
