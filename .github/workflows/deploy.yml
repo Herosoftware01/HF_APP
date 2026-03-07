@@ -12,17 +12,18 @@ jobs:
     steps:
 
     - name: Stop Node Processes
-      run: taskkill /F /IM node.exe || exit 0
+      run: taskkill /F /IM node.exe
+      continue-on-error: true
 
     - name: Clean Runner Workspace
       run: |
-        if exist node_modules rmdir /s /q node_modules
-        if exist dist rmdir /s /q dist
+        if (Test-Path node_modules) { Remove-Item node_modules -Recurse -Force }
+        if (Test-Path dist) { Remove-Item dist -Recurse -Force }
 
     - name: Checkout Repository
       uses: actions/checkout@v4
 
-    - name: Install Dependencies (Fast Install)
+    - name: Install Dependencies
       run: npm ci
 
     - name: Build React App
@@ -33,15 +34,17 @@ jobs:
 
     - name: Stop IIS App Pool
       run: |
-        powershell Import-Module WebAdministration
-        powershell Stop-WebAppPool -Name "HF_FRONTEND"
+        Import-Module WebAdministration
+        Stop-WebAppPool -Name "HF_FRONTEND"
 
     - name: Deploy Build to IIS
       run: |
-        if exist "D:\PRODUCTION_SOFTWEARE\frontend\dist" rmdir /s /q "D:\PRODUCTION_SOFTWEARE\frontend\dist"
-        xcopy dist "D:\PRODUCTION_SOFTWEARE\frontend\dist" /E /H /C /I /Y
+        if (Test-Path "D:\PRODUCTION_SOFTWEARE\frontend\dist") {
+          Remove-Item "D:\PRODUCTION_SOFTWEARE\frontend\dist" -Recurse -Force
+        }
+        Copy-Item dist "D:\PRODUCTION_SOFTWEARE\frontend\dist" -Recurse
 
     - name: Start IIS App Pool
       run: |
-        powershell Import-Module WebAdministration
-        powershell Start-WebAppPool -Name "HF_FRONTEND"
+        Import-Module WebAdministration
+        Start-WebAppPool -Name "HF_FRONTEND"
