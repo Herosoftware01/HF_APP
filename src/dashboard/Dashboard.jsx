@@ -5,7 +5,7 @@ function Dashboard() {
     <div style={{ display: "flex" }}>
       {/* <Sidebar /> */}
       <div style={{ padding: "20px" }}>
-        <h2>Welcome Dashboard</h2>
+        <h2>Welcome HeroFashion Users</h2>
       </div>
     </div>
   );

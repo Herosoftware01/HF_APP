@@ -26,7 +26,7 @@ interface OrderData {
   mainimagepath: string; finaldelvdate: string; prnclr?: string | null; prnfile1?: string; prnfile2?: string;img_fpath?:string
 }
 
-const HeroFashionGrid13: React.FC = () => {
+const OrdPagination: React.FC = () => {
   const [dataSource, setDataSource] = useState<OrderData[]>([]);
   const[totalCount, setTotalCount] = useState<number>(0);
   const [showingCount, setShowingCount] = useState<number>(0);
@@ -207,7 +207,7 @@ const HeroFashionGrid13: React.FC = () => {
     </div>
   );
 
-  const imageFieldTemplate = (field: 'mainimagepath' | 'prnfile1' | 'prnfile2' | 'img_fpath') => (p: OrderData) => {
+  const imageFieldTemplate = (field: 'mainimagepath' | 'prnfile1' | 'prnfile2') => (p: OrderData) => {
     if (!p[field]) return <div style={{ color: '#ccc', fontSize: '10px' }}>No Image</div>;
     return <img src={p[field]} alt="img" loading="lazy" style={{ width: '75px', height: '75px', objectFit: 'contain', border: '1px solid #eee' }} />;
   };
@@ -295,7 +295,15 @@ const HeroFashionGrid13: React.FC = () => {
         <div className="header-left">
           {showingCount} / {totalCount} Records
         </div>
-
+           <div className="header-right">
+          <input
+            type="text"
+            placeholder="Search all columns..."
+            value={searchKey}
+            onChange={onSearchChange}
+            className="search-input"
+          />
+        </div>
         {/* Center: Title */}
         <div className="header-center">
           HERO FASHION - ORDER DASHBOARD
@@ -326,6 +334,7 @@ const HeroFashionGrid13: React.FC = () => {
           enableVirtualization={true}
           rowHeight={105}
           allowSorting={true}
+          allowPaging={true}
           allowGrouping={true}
           allowFiltering={true}
           allowResizing={true}
@@ -368,4 +377,4 @@ const HeroFashionGrid13: React.FC = () => {
   );
 };
 
-export default HeroFashionGrid13;
+export default OrdPagination;
