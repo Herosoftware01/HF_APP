@@ -3,7 +3,11 @@ import HeroFashionGrid13 from "../order/ord_order.tsx"
 import HrReportGrid from "../order/ord1 ok.tsx"
 import TallyBalanceReport from "../order/tally.tsx"
 import OrdPagination from "../order/ord_pagination.tsx"
+<<<<<<< HEAD
 import PrnReportGrid from "../order/print.tsx"
+=======
+
+>>>>>>> 40e3e23eb0b50924f0730f4c529e20527fd4d064
 // import HrReportGrid from "../order/ord1 ok.tsx"
 // const HrReportGrid = React.lazy(() => import('../order/ord1 ok'));
 // // const StoreGrid = React.lazy(() => import('../page/order/StoreGrid'));
@@ -22,6 +26,8 @@ import '../../../../node_modules/@syncfusion/ej2-react-grids/styles/material.css
 import CardGrid from '../order/Card.jsx';
 // @import '@syncfusion/ej2-grids/styles/material.css';
 import '../../../../node_modules/@syncfusion/ej2-grids/styles/material.css';
+import Card1 from '../card/Card.jsx';
+import Card2 from '../card/Card2.jsx';
 
 // import '../css/style.css'
 
@@ -36,7 +42,12 @@ function Home() {
          {/* <Route path='/store' element= {<StoreGrid />} /> */}
          <Route path="/TallyBalanceReport" element={<TallyBalanceReport />} /> 
          <Route path="/OrdPagination" element={<OrdPagination />} /> 
+<<<<<<< HEAD
          <Route path="/PrnReportGrid" element={<PrnReportGrid />} /> 
+=======
+         <Route path="/card1" element={<Card1 />} /> 
+         <Route path="/card2" element={<Card2 />} /> 
+>>>>>>> 40e3e23eb0b50924f0730f4c529e20527fd4d064
         
     </Routes>
   );

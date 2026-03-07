@@ -104,16 +104,9 @@ function Sidebar() {
       </style>
 
       {/* --- MOBILE TOP BAR (Fixed Header) --- */}
-      {/* <header className="lg:hidden fixed top-0 left-0 right-0 h-16 bg-emerald-600 text-white flex items-center justify-between px-5 z-[100] shadow-md"> */}
-        <header className="lg:hidden fixed top-0 left-0 right-0 h-16 bg-emerald-600 text-white flex items-center justify-between px-5 z-[100] shadow-md flex-row-reverse">
-        <div className="flex items-center gap-8">
-          {/* <div className="hidden w-8 h-8 bg-white/20 rounded-lg flex items-center justify-center font-black">HF</div> */}
-          <input
-            type="text"
-            placeholder="Search..."
-            className="w-40 px-2 py-1 text-sm text-black rounded-md border border-white focus:outline-none text-white"
-          />
-
+      <header className="lg:hidden fixed top-0 left-0 right-0 h-16 bg-emerald-600 text-white flex items-center justify-between px-5 z-[100] shadow-md">
+        <div className="flex items-center gap-3">
+          <div className="w-8 h-8 bg-white/20 rounded-lg flex items-center justify-center font-black">HF</div>
           <span className="font-black tracking-tight uppercase text-sm">Hero Fashion</span>
         </div>
         <button 
@@ -161,6 +154,7 @@ function Sidebar() {
               <div className="flex flex-col overflow-hidden">
                 <span className="text-[12px] font-bold truncate">{userName}</span>
                 <span className="text-[9px] text-emerald-200 uppercase font-black">Online</span>
+
               
               </div>
               <div>
