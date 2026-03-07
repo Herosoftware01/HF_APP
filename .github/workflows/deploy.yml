@@ -10,52 +10,20 @@ jobs:
     runs-on: [self-hosted, windows, x64]
 
     steps:
-
-    # 1️⃣ Checkout repo in a unique folder per run
-    - name: Checkout Repository
+    - name: Checkout repo
       uses: actions/checkout@v4
-      with:
-        path: HF_APP_build_${{ github.run_id }}  # unique folder
 
-    # 2️⃣ Kill lingering Node processes (unlock native modules)
-    - name: Kill Node processes
-      run: |
-        taskkill /F /IM node.exe || echo "No node processes running"
+    - name: Install dependencies
+      run: npm install
 
-    # 3️⃣ Install dependencies fresh
-    - name: Install Dependencies
-      run: |
-        cd HF_APP_build_${{ github.run_id }}
-        npm ci
+    - name: Build React app
+      run: npm run build
 
-    # 4️⃣ Build React app
-    - name: Build React App
-      run: |
-        cd HF_APP_build_${{ github.run_id }}
-        npm run build
-
-    # 5️⃣ Copy web.config into build folder
     - name: Copy web.config
-      run: |
-        copy HF_APP_build_${{ github.run_id }}\web.config HF_APP_build_${{ github.run_id }}\build\web.config
+      run: copy web.config dist\web.config
 
-    # 6️⃣ Stop IIS App Pool
-    - name: Stop IIS App Pool
-      run: |
-        Import-Module WebAdministration
-        Stop-WebAppPool -Name "HF_FRONTEND"
+    - name: Deploy to IIS folder
+      run: xcopy dist "D:\PRODUCTION_SOFTWEARE\frontend\dist" /E /H /C /I /Y
 
-    # 7️⃣ Deploy build to IIS
-    - name: Deploy Build
-      run: |
-        $dest = "D:\PRODUCTION_SOFTWEARE\frontend\dist"
-        if (Test-Path $dest) {
-          Remove-Item $dest -Recurse -Force -ErrorAction SilentlyContinue
-        }
-        Copy-Item HF_APP_build_${{ github.run_id }}\build $dest -Recurse
-
-    # 8️⃣ Start IIS App Pool
-    - name: Start IIS App Pool
-      run: |
-        Import-Module WebAdministration
-        Start-WebAppPool -Name "HF_FRONTEND"
+    - name: Restart IIS
+      run: iisreset

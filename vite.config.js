@@ -26,12 +26,12 @@ export default defineConfig({
     description: 'A progressive web app built with React and Vite',
     icons: [
       {
-        src: '/icons/pwa-icon.png',
+        src: '/icons/application.png',
         sizes: '192x192',
         type: 'image/png',
       },
       {
-        src: '/icons/pwa-icon.png',
+        src: '/icons/application.png',
         sizes: '512x512',
         type: 'image/png',
       },
