@@ -11,43 +11,43 @@ jobs:
 
     steps:
 
-    # 1️⃣ Clean workspace safely
-    - name: Clean workspace
-      run: |
-        if (Test-Path node_modules) { Remove-Item node_modules -Recurse -Force -ErrorAction SilentlyContinue }
-        if (Test-Path dist) { Remove-Item dist -Recurse -Force -ErrorAction SilentlyContinue }
-
-    # 2️⃣ Checkout repo
+    # 1️⃣ Checkout repo in separate folder
     - name: Checkout Repository
       uses: actions/checkout@v4
+      with:
+        path: HF_APP_build
 
-    # 3️⃣ Install dependencies
+    # 2️⃣ Install dependencies
     - name: Install Dependencies
-      run: npm ci
+      run: |
+        cd HF_APP_build
+        npm ci
 
-    # 4️⃣ Build React App
+    # 3️⃣ Build React App
     - name: Build React App
-      run: npm run build
+      run: |
+        cd HF_APP_build
+        npm run build
 
-    # 5️⃣ Copy web.config
+    # 4️⃣ Copy web.config
     - name: Copy web.config
-      run: copy web.config dist\web.config
+      run: copy HF_APP_build\web.config HF_APP_build\dist\web.config
 
-    # 6️⃣ Stop IIS App Pool
+    # 5️⃣ Stop IIS App Pool
     - name: Stop IIS App Pool
       run: |
         Import-Module WebAdministration
         Stop-WebAppPool -Name "HF_FRONTEND"
 
-    # 7️⃣ Deploy Build to IIS
+    # 6️⃣ Deploy Build to IIS
     - name: Deploy Build
       run: |
         if (Test-Path "D:\PRODUCTION_SOFTWEARE\frontend\dist") {
           Remove-Item "D:\PRODUCTION_SOFTWEARE\frontend\dist" -Recurse -Force -ErrorAction SilentlyContinue
         }
-        Copy-Item dist "D:\PRODUCTION_SOFTWEARE\frontend\dist" -Recurse
+        Copy-Item HF_APP_build\dist "D:\PRODUCTION_SOFTWEARE\frontend\dist" -Recurse
 
-    # 8️⃣ Start IIS App Pool
+    # 7️⃣ Start IIS App Pool
     - name: Start IIS App Pool
       run: |
         Import-Module WebAdministration
